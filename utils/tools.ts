@@ -9,6 +9,19 @@ export const timeFormat = (time?: string) => {
   let sec = addZero(date.getSeconds());
   return `${year}-${month}-${day} ${hour}:${minutes}:${sec}`;
 };
- const addZero = (num: number) => {
+const addZero = (num: number) => {
   return num > 10 ? num : "0" + num;
+};
+
+export const deepCopy = (obj = {}) => {
+  let newObj = {};
+  if (typeof obj === "object" && obj !== null) {
+    newObj = obj instanceof Array ? [] : {};
+    for (let key in obj) {
+      newObj[key] = deepCopy(obj[key]);
+    }
+  } else {
+    newObj = obj;
+  }
+  return newObj;
 };
